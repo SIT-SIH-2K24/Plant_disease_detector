@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eafaf1; /* Adjust the background color as you prefer */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the entire container */
+            z-index: -1; /* Place the image behind other content */
+        }
+
+        .container {
+            background-color: rgba(0, 128, 0, 0.8); /* Slightly transparent green box */
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px; /* Increased width */
+            width: 100%;
+            margin: 0 20px; /* Add some horizontal margin */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+
+        .upload-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .image-label {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            background-color: #fff;
+            color: #2c7a7b;
+            padding: 10px 15px;
+            border: 2px solid #319795;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            width: 100%;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        #file-status {
+            margin-bottom: 15px;
+            color: #ff5252;
+            display: none;
+        }
+
+        button {
+            background-color: #4caf50; /* Green button */
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        /* Animations */
+        .container {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%; /* Adjusts the container width for smaller screens */
+                padding: 20px;
+            }
+        }
+        h2 {
+    font-size: 1.5rem; /* Adjust font size if needed */
+    margin-bottom: 20px;
+    color: #ffeb3b; /* Yellow color */
+}
+
+    </style>
+</head>
+<body>
+    <!-- Background image -->
+    <img src="leaf.jpg" alt="Background Image" class="background-image">
+
+    <div class="container">
+        <h2>AI-Driven Crop Disease Prediction and Management System</h2>
+        <div class="upload-box">
+            <label for="plantImage" class="image-label">Share a picture of the plant:</label>
+            <input type="file" id="plantImage" accept="image/*">
+            <p id="file-status"></p>
+            <button id="analyzeBtn">Analyze</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('plantImage').addEventListener('change', function() {
+            const fileStatus = document.getElementById('file-status');
+            const file = this.files[0];
+            
+            if (file) {
+                fileStatus.textContent = File chosen: ${file.name};
+                fileStatus.style.color = '#4caf50';
+                fileStatus.style.display = 'block';
+            } else {
+                fileStatus.textContent = '';
+                fileStatus.style.display = 'none';
+            }
+        });
+    
+        document.getElementById('analyzeBtn').addEventListener('click', function() {
+            const imageInput = document.getElementById('plantImage').files[0];
+            const fileStatus = document.getElementById('file-status');
+            
+            if (!imageInput) {
+                fileStatus.textContent = 'No file chosen';
+                fileStatus.style.display = 'block';
+                fileStatus.style.color = '#ff5252';
+            } else {
+                fileStatus.textContent = '';
+                fileStatus.style.display = 'none';
+                alert("Analyzing the image...");
+            }
+        });
+    </script>
+</body>
+</html>
